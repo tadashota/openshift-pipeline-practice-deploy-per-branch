@@ -10,7 +10,7 @@ pipeline {
     stage('deploy') {
       steps {
         sh '''
-        oc apply -f nginx-deployment.yaml'''
+        oc apply -f template-deploy-stag.yaml'''
       }
     }
   }
