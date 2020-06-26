@@ -9,8 +9,11 @@ pipeline {
   stages {
     stage('deploy') {
       steps {
-        sh '''
-        oc apply -f template-deploy-stag.yaml'''
+      echo "staging deploy"
+      script{
+        openshift.withCluster(){
+        openshift.apply(('-f', 'template-deploy-stag.yaml')))
+        }
       }
     }
   }
