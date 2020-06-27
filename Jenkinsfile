@@ -10,7 +10,7 @@ pipeline {
     }
   }
 
-  stage('staging deploy'){
+  stages('staging deploy'){
     when {
         branch 'staging'
     }
@@ -20,7 +20,7 @@ pipeline {
     }
   }
 
-  stage('pruduction deploy'){
+  stages('pruduction deploy'){
     when {
         branch 'master'
     }
