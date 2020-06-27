@@ -27,5 +27,6 @@ pipeline {
         echo "production deploy"
         sh 'oc apply -f template-deploy-prod.yaml'
       }
-   }
+    }
+  }
 }
