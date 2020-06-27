@@ -17,7 +17,6 @@ pipeline {
     steps{
       echo "staging deploy"
       sh 'oc apply -f template-deploy-stag.yaml'
-      }
     }
   }
 
@@ -28,7 +27,6 @@ pipeline {
     steps{
       echo "production deploy"
       sh 'oc apply -f template-deploy-prod.yaml'
-      }
     }
   }
 }
