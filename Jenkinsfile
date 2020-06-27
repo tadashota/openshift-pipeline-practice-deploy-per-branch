@@ -9,24 +9,23 @@ pipeline {
       yamlFile 'jenkins-agent-pod.yaml'
     }
   }
-
-  stages('staging deploy'){
-    when {
-        branch 'staging'
+  stages{
+    stage('staging deploy'){
+      when {
+          branch 'staging'
+      }
+      steps{
+        echo "staging deploy"
+        sh 'oc apply -f template-deploy-stag.yaml'
+      }
     }
-    steps{
-      echo "staging deploy"
-      sh 'oc apply -f template-deploy-stag.yaml'
-    }
-  }
-
-  stages('pruduction deploy'){
-    when {
-        branch 'master'
-    }
-    steps{
-      echo "production deploy"
-      sh 'oc apply -f template-deploy-prod.yaml'
-    }
-  }
+    stage('pruduction deploy'){
+      when {
+          branch 'master'
+      }
+      steps{
+        echo "production deploy"
+        sh 'oc apply -f template-deploy-prod.yaml'
+      }
+   }
 }
