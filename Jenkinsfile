@@ -1,3 +1,7 @@
+#!groovy
+def ns_stag = "user1-app-stag"
+def ns_prod = "user1-app-prod"
+
 pipeline {
   agent {
     kubernetes {
@@ -6,14 +10,24 @@ pipeline {
     }
   }
 
-  stages {
-    stage('deploy') {
-      steps {
+  stage('staging deploy'){
+    when {
+        branch 'staging'
+    }
+    steps{
       echo "staging deploy"
-      script{
-        openshift.withCluster(){
-        openshift.apply(('-f', 'template-deploy-stag.yaml')))
-        }
+      sh 'oc apply -f template-deploy-stag.yaml'
+      }
+    }
+  }
+
+  stage('pruduction deploy'){
+    when {
+        branch 'master'
+    }
+    steps{
+      echo "production deploy"
+      sh 'oc apply -f template-deploy-prod.yaml'
       }
     }
   }
